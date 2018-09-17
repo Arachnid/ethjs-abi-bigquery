@@ -1,0 +1,14 @@
+{
+  "name": "ethjs-abi-bigquery",
+  "version": "1.0.0",
+  "description": "Webpack packaged ethjs-abi for use in BigQuery",
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ethjs-abi": "^0.2.1"
+  }
+}
