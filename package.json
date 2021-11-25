@@ -6,9 +6,13 @@
     "build": "webpack --config webpack.config.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Nick Johnson <arachnid@notdot.net>",
+  "license": "MIT",
   "dependencies": {
-    "ethjs-abi": "^0.2.1"
+    "@ethersproject/abi": "^5.5.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
   }
 }
