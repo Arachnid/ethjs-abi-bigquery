@@ -1,4 +1,4 @@
-# ethjs-abi-bigquery
+# ethers-abi-bigquery
 
 This module repackages ethjs-abi for use in BigQuery, to decode Ethereum event logs.
 
@@ -8,32 +8,14 @@ CREATE TEMP FUNCTION
   DECODE_ERC721_TRANSFER(data STRING, topics ARRAY<STRING>)
   RETURNS STRUCT<`from` STRING, `to` STRING, tokenId STRING>
   LANGUAGE js AS """
-    var CRYPTOKITTY_TRANSFER = {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "name": "from",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "name": "to",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "name": "tokenId",
-          "type": "uint256"
-        }
-      ],
-      "name": "Transfer",
-      "type": "event"
-    };
-    return abi.decodeEvent(CRYPTOKITTY_TRANSFER, data, topics, false);
+    var CRYPTOKITTY_ABI = [
+      "event Transfer(address from, address to, uint256 tokenId)",
+    ];
+    var iface = new abi.Interface(CRYPTOKITTY_ABI);
+    return iface.decodeEventLog("Transfer", data, topics);
 """
 OPTIONS
-  ( library="https://storage.googleapis.com/ethlab-183014.appspot.com/ethjs-abi.js" );
+  ( library="https://storage.googleapis.com/ens-manager.appspot.com/ethers-abi.js" );
 SELECT
   DECODE_ERC721_TRANSFER(data, topics) AS transfer
 FROM
